@@ -1,5 +1,6 @@
 /*  eslint-env node */
 import { createRequire } from 'node:module';
+import { readFileSync } from 'node:fs';
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import json from '@rollup/plugin-json';
@@ -17,6 +18,14 @@ import serve from 'rollup-plugin-serve';
 const require = createRequire(import.meta.url);
 const pkg = require('./package.json');
 
+const licenseBanner = [
+  './LICENSE',
+  './node_modules/@thomasloven/round-slider/LICENSE.txt',
+  './node_modules/lit/LICENSE',
+]
+  .map((file) => `/*!\n${readFileSync(file, 'utf8')}\n*/`)
+  .join('\n');
+
 const IS_DEV = process.env.ROLLUP_WATCH;
 
 const serverOptions = {
@@ -31,6 +40,16 @@ const serverOptions = {
 
 const plugins = [
   nodeResolve(),
+  // Keep the bundled slider independent of HA and other custom cards.
+  // This package registers its element unconditionally, so use a private name.
+  replace({
+    include: '**/node_modules/@thomasloven/round-slider/round-slider.js',
+    values: {
+      'customElements.define("round-slider", RoundSlider);':
+        'customElements.define("purifier-round-slider", RoundSlider);',
+    },
+    preventAssignment: true,
+  }),
   commonjs(),
   json(),
   replace({
@@ -72,6 +91,7 @@ export default {
   input: 'src/purifier-card.ts',
   output: {
     dir: 'dist',
+    banner: licenseBanner,
     format: 'es',
     inlineDynamicImports: true,
   },
