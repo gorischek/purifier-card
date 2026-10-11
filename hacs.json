@@ -1,5 +1,5 @@
 {
   "name": "Purifier Card",
-  "render_readme": true,
-  "filename": "purifier-card.js"
+  "filename": "purifier-card.js",
+  "render_readme": true
 }
