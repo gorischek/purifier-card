@@ -77,7 +77,11 @@ const plugins = [
     exclude: 'node_modules/**',
   }),
   IS_DEV && serve(serverOptions),
-  !IS_DEV && minifyLiterals(),
+  // Preserve self-closing SVG paths in the bundled slider's templates.
+  !IS_DEV &&
+    minifyLiterals({
+      exclude: '**/node_modules/@thomasloven/round-slider/**',
+    }),
   !IS_DEV &&
     terser({
       maxWorkers: 1,
