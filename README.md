@@ -1,21 +1,14 @@
-> [!IMPORTANT]
->
-> I don't own an air purifier anymore.
->
-> I still maintain this card. I will be fixing bugs, maitaining dependencies and styles. However, new features won't be actively developed anymore.
->
-> If you have an air purifier and are willing to contribute, you are welcome.
-
-[![SWUbanner](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner-direct-single.svg)](https://stand-with-ukraine.pp.ua/)
-
-# Purifier Card
+# Purifier Card — gorischek fork
 
 [![GitHub Release][gh-release-image]][gh-release-url]
 [![GitHub Downloads][gh-downloads-image]][gh-downloads-url]
-[![hacs][hacs-image]][hacs-url]
-[![GitHub Sponsors][gh-sponsors-image]][gh-sponsors-url]
-[![Buy Me A Coffee][buymeacoffee-image]][buymeacoffee-url]
-[![Twitter][twitter-image]][twitter-url]
+[![HACS Custom Repository][hacs-image]][hacs-url]
+
+This fork is maintained by [gorischek](https://github.com/gorischek) and is based on [Purifier Card by Denys Dovhan](https://github.com/denysdovhan/purifier-card).
+
+It includes fixes for current Home Assistant controls and for automatic updates of separate statistics and AQI sensors. The statistics update fix has been tested with a Levoit Vital 100S connected through ESPHome.
+
+Install this fork in HACS as a custom **Dashboard** repository. Download releases from this repository to receive the fork's fixes.
 
 > [!NOTE]
 > Air Purifier card for [Home Assistant][home-assistant] Lovelace UI
@@ -24,24 +17,18 @@ By default, the Home Assistant does not provide any card for controlling air pur
 
 ![Preview of purifier-card][preview-image]
 
-## Sponsorship
-
-Your generosity will help me maintain and develop more projects like this one.
-
-- 💖 [Sponsor on GitHub][gh-sponsors-url]
-- ☕️ [Buy Me A Coffee][buymeacoffee-url]
-- Bitcoin: `bc1q7lfx6de8jrqt8mcds974l6nrsguhd6u30c6sg8`
-- Ethereum: `0x6aF39C917359897ae6969Ad682C14110afe1a0a1`
-
 ## Installing
 
 ### HACS
 
-This card is available in [HACS][hacs] (Home Assistant Community Store).
+1. Open HACS and select **Custom repositories** from the menu.
+2. Add `https://github.com/gorischek/purifier-card` with the category **Dashboard** (called **Lovelace** or **Plugin** in older HACS versions).
+3. Find **Purifier Card** by **gorischek** and download the latest published release.
+4. Reload the Home Assistant dashboard after installation.
 
 [![Add to HACS via My Home Assistant][hacs-install-image]][hacs-install-url]
 
-Just search for `Purifier Card` in the plugins tab.
+Release builds are attached as `purifier-card.js`. Wait until the Release workflow has finished and this file is attached before installing a newly published release.
 
 ### Manual
 
@@ -221,7 +208,7 @@ style: |
 
 I've added an animation for this card to make it alive:
 
-<img src="https://raw.githubusercontent.com/denysdovhan/purifier-card/master/src/images/purifier-working.gif" width="300px">
+<img src="https://raw.githubusercontent.com/gorischek/purifier-card/main/src/images/purifier-working.gif" width="300px">
 
 How did I make this animation? It's a long story…
 
@@ -262,9 +249,9 @@ This card supports translations. Please, help to add more translations and impro
 
 ## Supported models
 
-This card relies on basic fan services, like `toggle`, `turn_on`, `turn_off`, etc. It should work with any air purifier, however I can physically test it only with my own purifier.
+This card relies on basic fan services, like `toggle`, `turn_on`, `turn_off`, etc. Compatibility depends on the fan entity and features exposed by its integration.
 
-If this card works with your air purifier, please open a PR and your model to the list (in alphabetical order).
+If this card works with your air purifier, please open a PR and add your model to the list (in alphabetical order).
 
 - Air Purifier 4 Pro
 - Air Purifier 3/3H
@@ -279,6 +266,7 @@ If this card works with your air purifier, please open a PR and your model to th
 - Ikea Starkvind
 - Levoit Air Purifier (Core 200S) (partially)
 - Levoit Air Purifier (Core 400S)
+- Levoit Vital 100S (tested with ESPHome)
 - Philips AirPurifier AC3858/50 (partially)
 - Philips AirPurifier AC4221/11 ([using philips-airpurifier-coap cutom component](https://github.com/kongo09/philips-airpurifier-coap))
 - SmartMI Air Purifier
@@ -305,12 +293,12 @@ MIT © [Denys Dovhan][denysdovhan]
 
 <!-- Badges -->
 
-[gh-release-url]: https://github.com/denysdovhan/purifier-card/releases/latest
-[gh-release-image]: https://img.shields.io/github/v/release/denysdovhan/purifier-card?style=flat-square
-[gh-downloads-url]: https://github.com/denysdovhan/purifier-card/releases
-[gh-downloads-image]: https://img.shields.io/github/downloads/denysdovhan/purifier-card/total?style=flat-square
+[gh-release-url]: https://github.com/gorischek/purifier-card/releases/latest
+[gh-release-image]: https://img.shields.io/github/v/release/gorischek/purifier-card?style=flat-square
+[gh-downloads-url]: https://github.com/gorischek/purifier-card/releases
+[gh-downloads-image]: https://img.shields.io/github/downloads/gorischek/purifier-card/total?style=flat-square
 [hacs-url]: https://github.com/hacs/integration
-[hacs-image]: https://img.shields.io/badge/hacs-default-orange.svg?style=flat-square
+[hacs-image]: https://img.shields.io/badge/HACS-custom-orange.svg?style=flat-square
 [gh-sponsors-url]: https://github.com/sponsors/denysdovhan
 [gh-sponsors-image]: https://img.shields.io/github/sponsors/denysdovhan?style=flat-square
 [buymeacoffee-url]: https://patreon.com/denysdovhan
@@ -323,12 +311,12 @@ MIT © [Denys Dovhan][denysdovhan]
 [home-assistant]: https://www.home-assistant.io/
 [hacs]: https://hacs.xyz
 [hacs-install-image]: https://my.home-assistant.io/badges/hacs_repository.svg
-[hacs-install-url]: https://my.home-assistant.io/redirect/hacs_repository/?owner=denysdovhan&repository=purifier-card&category=plugin
+[hacs-install-url]: https://my.home-assistant.io/redirect/hacs_repository/?owner=gorischek&repository=purifier-card&category=plugin
 [preview-image]: https://user-images.githubusercontent.com/3459374/164275676-504d92aa-2c61-4451-ae9b-23dad113ce14.png
-[latest-release]: https://github.com/denysdovhan/purifier-card/releases/latest
+[latest-release]: https://github.com/gorischek/purifier-card/releases/latest
 [ha-scripts]: https://www.home-assistant.io/docs/scripts/
 [original-gif]: https://github.com/macbury/SmartHouse/blob/master/home-assistant/www/custom-lovelace/air-purifier/standby.gif
-[edit-readme]: https://github.com/denysdovhan/purifier-card/edit/master/README.md
-[add-translation]: https://github.com/denysdovhan/purifier-card/blob/master/CONTRIBUTING.md#how-to-add-translation
+[edit-readme]: https://github.com/gorischek/purifier-card/edit/main/README.md
+[add-translation]: https://github.com/gorischek/purifier-card/blob/main/CONTRIBUTING.md#how-to-add-translation
 [macbury-smart-house]: https://macbury.github.io/SmartHouse/HomeAssistant/Lovelace/#air-purifier
 [denysdovhan]: https://denysdovhan.com
